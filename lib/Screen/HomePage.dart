@@ -106,20 +106,38 @@ class _HomeState extends State<Home> {
                                 alignment: Alignment.center,
                                 child: Stack(
                                   children: [
-                                    IconButton(
-                                      onPressed: () async {
-                                        ImagePicker pick = ImagePicker();
-                                        XFile? image = await pick.pickImage(
-                                            source: ImageSource.gallery);
-                                        setState(() {
-                                          Images = image!.path;
-                                        });
-                                      },
-                                      icon: Icon(Icons.camera_alt),
-                                    ),
-                                    CircleAvatar(
-                                      radius: 100,
+                                    Images.isEmpty
+                                        ? Icon(
+                                      Icons.people_alt_rounded,
+                                      size: 120,
+                                    )
+                                        : CircleAvatar(
+                                      radius: 70,
                                       backgroundImage: FileImage(File("$Images"),),
+                                    ),
+                                    Positioned(
+                                      bottom: 0,
+                                      right: 2,
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          ImagePicker Picker = ImagePicker();
+                                          XFile? image = await Picker.pickImage(source: ImageSource.gallery);
+                                          setState(() {
+                                            Images = image!.path;
+                                          });;
+                                        },
+                                        icon: Container(
+                                          height: 100,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color: Colors.black, shape: BoxShape.circle),
+                                          child: Icon(
+                                            Icons.camera_alt_outlined,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -245,7 +263,7 @@ class _HomeState extends State<Home> {
         width: 60,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.purple,
+          color: Colors.black12,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: Colors.black, width: 2),
         ),
@@ -270,7 +288,7 @@ class _HomeState extends State<Home> {
         width: 60,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.purple,
+          color: Colors.black12,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: Colors.black, width: 2),
         ),
